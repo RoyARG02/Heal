@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'ui/slider.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -8,112 +9,42 @@ void main() {
   ));
 }
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  double _value1 = 0.0;
-  double _value2 = 0.0;
-  void onChanged1(value) {
-    setState(() {
-      _value1 = value;
-    });
-  }
-
-  void onChanged2(value) {
-    setState(() {
-      _value2 = value;
-    });
-  }
-
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Column(
-        children: <Widget>[
-          //----WAVES-----
+      body: Stack(
+        children: [
           new Image.asset("assets/images/ipl.png"),
-
-          //---PADDING----
-          new Padding(
-            padding: EdgeInsets.all(25.0),
-          ),
-
-          //---HEAL TEXT---
-          new Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.fromLTRB(50.0, 0.0, 0.0, 0.0),
-            child: new Text(
-              "heal.",
-              style: new TextStyle(fontFamily: "Anke", fontSize: 64),
-            ),
-          ),
-
-          //---PADDING--
-          new Padding(
-            padding: EdgeInsets.all(25.0),
-          ),
-
-          //SLIDER 1
-          new Container(
-            padding: EdgeInsets.all(25.0),
+          Container(
+            margin: EdgeInsets.only(top: 110.0),
             child: new Column(
               children: <Widget>[
-                new Row(
-                  children: <Widget>[
-                    new Padding(
-                      padding: EdgeInsets.fromLTRB(12.0, 0.0, 0.0, 0.0),
-                    ),
-                    new Align(
-                      alignment: Alignment.centerLeft,
-                      child: new Text("Time",
-                          style: new TextStyle(
-                            color: Color(0xFFEBEBEB),
-                            fontFamily: 'Anke',
-                            fontSize: 18,
-                          )),
-                    ),
-                  ],
+                //---HEAL TEXT---
+                new Container(
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.only(left: 45.0),
+                  child: new Text(
+                    "heal.",
+                    style: new TextStyle(fontFamily: "Anke", fontSize: 64),
+                  ),
                 ),
-                new Slider(
-                  inactiveColor: Color(0xFFEBEBEB),
-                  activeColor: Color(0xFF00B7ED),
-                  onChanged: onChanged1,
-                  value: _value1,
-                ),
-              ],
-            ),
-          ),
-          //END OF SLIDER 1
 
-          //slider
-          new Container(
-            padding: EdgeInsets.all(25.0),
-            child: new Column(
-              children: <Widget>[
-                new Row(
-                  children: <Widget>[
-                    new Padding(
-                      padding: EdgeInsets.fromLTRB(12.0, 0.0, 0.0, 0.0),
-                    ),
-                    new Align(
-                      alignment: Alignment.centerLeft,
-                      child: new Text("Intensity",
-                          style: new TextStyle(
-                            color: Color(0xFFEBEBEB),
-                            fontFamily: 'Anke',
-                            fontSize: 18,
-                          )),
-                    ),
-                  ],
+                //---PADDING OR SPACING--
+                new SizedBox(
+                  height: 50.0,
                 ),
-                new Slider(
-                  inactiveColor: Color(0xFFEBEBEB),
-                  activeColor: Color(0xFF00B7ED),
-                  onChanged: onChanged2,
-                  value: _value2,
+
+                //SLIDERS
+                new Container(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 25.0, horizontal: 35.0),
+                  child: new Column(
+                    children: <Widget>[
+                      new TextSlider("Time"),
+                      new TextSlider("Intensity"),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -121,7 +52,6 @@ class _HomeState extends State<Home> {
         ],
       ),
       floatingActionButton: new FloatingActionButton(
-        isExtended: true,
         backgroundColor: Colors.white,
         onPressed: () {
           debugPrint("HEY!");
